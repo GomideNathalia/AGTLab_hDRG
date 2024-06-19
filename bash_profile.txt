@@ -1,0 +1,45 @@
+# .bash_profile
+
+# Get the aliases and functions
+if [ -f ~/.bashrc ]; then
+	. ~/.bashrc
+fi
+
+# User specific environment and startup programs
+
+PATH=$PATH:$HOME/bin
+
+
+## MUGQIC genomes and modules for MUGQIC analysts
+
+HOST=`hostname`;
+
+DNSDOMAIN=`dnsdomainname`;
+
+export MUGQIC_INSTALL_HOME=/cvmfs/soft.mugqic/CentOS6
+
+if [[ $HOST == abacus* || $DNSDOMAIN == ferrier.genome.mcgill.ca ]]; then
+
+  export MUGQIC_INSTALL_HOME_DEV=/lb/project/mugqic/analyste_dev
+
+elif [[ $HOST == lg-* || $DNSDOMAIN == guillimin.clumeq.ca ]]; then
+
+  export MUGQIC_INSTALL_HOME_DEV=/gs/project/mugqic/analyste_dev/phase2
+
+elif [[ $BQMAMMOUTH == "mp2" ]]; then
+
+  export MUGQIC_INSTALL_HOME_DEV=$(share_nobackup bourque)/mugqic_dev
+
+fi
+
+module use $MUGQIC_INSTALL_HOME/modulefiles $MUGQIC_INSTALL_HOME_DEV/modulefiles
+
+export PS1="\[\033[38;5;13m\]abacus\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;35m\]\d\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;39m\]\t\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput bold)\]\[$(tput sgr0)\]\[\033[38;5;11m\]\w\[$(tput sgr0)\]\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;10m\]\\$\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]"
+
+export PATH
+export JOB_MAIL=melissa.zwaig@mail.mcgill.ca
+
+
+export PATH=$HOME/.local/bin:$PATH
+
+
